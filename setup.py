@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name = 'jdconfig',
     version = '2.0',
-    url='https://github.com/WarBean/jdconfig',
+    url='https://github.com/sysuzyq/jdconfig',
     py_modules = ['jdconfig'],
     author = 'Huabin Zheng',
     author_email = 'warbean@qq.com',
