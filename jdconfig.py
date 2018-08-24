@@ -204,6 +204,8 @@ class Config(dict):
                     '0'    : False,
                 }[value_str]
             else:
+                if value_type==list:
+                    value_str = eval(value_str)
                 self[key] = value_type(value_str)
 
         return unknown_args
