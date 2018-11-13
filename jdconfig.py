@@ -52,7 +52,16 @@ def init_assign(config, d, traverse):
         if type(value) == dict and len(value) > 0: continue
         sub_cfg, sub_key = consume_dots(config, full_key, create_default = True)
         sub_cfg[sub_key] = value
-
+        
+def byteify(input):
+    if isinstance(input, dict):
+        return {byteify(key): byteify(value) for key, value in input.iteritems()}
+    elif isinstance(input, list):
+        return [byteify(element) for element in input]
+    elif isinstance(input, unicode):
+        return input.encode('utf-8')
+    else:
+        return input
 ###############################################################
 # main class
 ###############################################################
@@ -64,6 +73,7 @@ class Config(dict):
         for arg in args:
             if isinstance(arg, str):
                 jd = json5.load(open(arg))
+                jd = byteify(jd) # for python2
                 init_assign(self, jd, traverse = True)
             elif isinstance(arg, dict):
                 init_assign(self, arg, traverse = True)
