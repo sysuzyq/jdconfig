@@ -73,7 +73,9 @@ class Config(dict):
         for arg in args:
             if isinstance(arg, str):
                 jd = json5.load(open(arg))
-                jd = byteify(jd) # for python2
+                from sys import version_info
+                if version_info.major == 2:
+                    jd = byteify(jd) # for python2
                 init_assign(self, jd, traverse = True)
             elif isinstance(arg, dict):
                 init_assign(self, arg, traverse = True)
