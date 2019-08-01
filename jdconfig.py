@@ -72,7 +72,7 @@ class Config(dict):
         super(Config, self).__init__()
         for arg in args:
             if isinstance(arg, str):
-                jd = json5.load(open(arg))
+                jd = json5.load(open(arg,'rb'))
                 from sys import version_info
                 if version_info.major == 2:
                     jd = byteify(jd) # for python2
